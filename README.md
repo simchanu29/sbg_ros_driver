@@ -1,6 +1,10 @@
 # sbg_driver
 ROS driver for SBG System Ellipse IMU
 
+## Warnings
+This is `develop` branch. Code may be unstable. 
+
+ - Orientation not working
 
 ## Installation
 
