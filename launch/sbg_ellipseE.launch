@@ -2,4 +2,5 @@
   <node name="sbg_ellipse" pkg="sbg_driver" type="ellipse" output="screen">
   	<rosparam command="load" file="$(find sbg_driver)/config/ellipse_E_default.yaml" />
   </node>
+  <node name="imu_driver" pkg="sbg_driver" type="imu_translator" />
 </launch>

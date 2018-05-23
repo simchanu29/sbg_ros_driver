@@ -119,7 +119,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS src
-  # LIBRARIES ${PROJECT_NAME} 
+  # LIBRARIES ${PROJECT_NAME}
 #  CATKIN_DEPENDS roscpp sensor_msgs std_msgs
   # DEPENDS sbgECom
 )
@@ -161,8 +161,15 @@ add_executable(ellipse_mag
   src/ellipse_msg.cpp
 )
 
+add_executable(imu_translator
+  src/imu_translator.cpp
+  src/ellipse.cpp
+  src/ellipse_msg.cpp
+)
+
 add_dependencies(ellipse ${sbg_driver_EXPORTED_TARGETS})
 add_dependencies(ellipse_mag ${sbg_driver_EXPORTED_TARGETS})
+add_dependencies(imu_translator ${sbg_driver_EXPORTED_TARGETS})
 
 target_compile_options(ellipse PRIVATE -fpermissive)
 target_compile_options(ellipse_mag PRIVATE -fpermissive)
@@ -183,6 +190,11 @@ target_link_libraries(ellipse_mag
    sbgECom
 )
 
+target_link_libraries(imu_translator
+   ${catkin_LIBRARIES}
+   sbgECom
+)
+
 #############
 ## Install ##
 #############
@@ -198,7 +210,7 @@ target_link_libraries(ellipse_mag
 # )
 
 ## Mark executables and/or libraries for installation
- install(TARGETS ellipse ellipse_mag
+ install(TARGETS ellipse ellipse_mag imu_translator
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
